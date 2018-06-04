@@ -1,15 +1,19 @@
 // webpack.config.js
-var Encore = require('@symfony/webpack-encore');
+const Encore = require('@symfony/webpack-encore');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 Encore
 // the project directory where all compiled assets will be stored
     .setOutputPath('build/')
 
     // the public path used by the web server to access the previous directory
-    .setPublicPath('/build')
+    .setPublicPath('/')
 
     // will create public/build/app.js and public/build/app.css
     .addEntry('app', './assets/js/app.js')
+
+    .enablePostCssLoader()
 
     .configureBabel(function(babelConfig) {
         // add additional presets
@@ -36,6 +40,13 @@ Encore
 
     // allow sass/scss files to be processed
     .enableSassLoader()
+
+    .addPlugin(new HtmlWebpackPlugin({
+        inlineSource: '.(js|css)$',
+        template: './assets/index.html',
+        filename: './index.html' //relative to root of the application
+    }))
+    .addPlugin(new HtmlWebpackInlineSourcePlugin())
 ;
 
 // export the final configuration
