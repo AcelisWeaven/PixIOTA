@@ -209,11 +209,14 @@ let previousDraw = {
     y2: canvas.height / 2 - subcanvas.height / 2 + subcanvas.height,
 };
 
+const lineWidth = 1;
+ctx.lineWidth = lineWidth;
+ctx.lineJoin = "round";
+ctx.strokeStyle = "#FFFFFF33";
 function redraw() {
     /* Clear the entire canvas */
     const op1 = ctx.transformedPoint(previousDraw.x1, previousDraw.y1);
     const op2 = ctx.transformedPoint(previousDraw.x2, previousDraw.y2);
-    const lineWidth = 1;
     ctx.clearRect(op1.x, op1.y, op2.x - op1.x, op2.y - op1.y);
     ctx.drawImage(subcanvas, canvas.width / 2 - subcanvas.width / 2, canvas.height / 2 - subcanvas.height / 2);
 
@@ -225,10 +228,6 @@ function redraw() {
     previousDraw.y2 = p2.y;
 
     // small stroke around the canvas
-    ctx.beginPath();
-    ctx.lineWidth = lineWidth;
-    ctx.lineJoin = "round";
-    ctx.strokeStyle = "#FFFFFF33";
     ctx.strokeRect(canvas.width / 2 - subcanvas.width / 2 - lineWidth / 2, canvas.height / 2 - subcanvas.height / 2 - lineWidth / 2, subcanvas.width + lineWidth, subcanvas.height + lineWidth);
 }
 
