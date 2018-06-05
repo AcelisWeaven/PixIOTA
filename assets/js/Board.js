@@ -1,3 +1,5 @@
+const Utilities = require("./Utilities");
+
 module.exports = class Board{
     constructor(size) {
         this.size = size;
@@ -9,6 +11,7 @@ module.exports = class Board{
         this.ctx = this.canvas.getContext('2d');
 
         this.init();
+        this.createPicker();
     }
 
     init() {
@@ -36,5 +39,16 @@ module.exports = class Board{
         const iData = new Uint8ClampedArray(this.data.buffer);
         const imageData = new ImageData(iData, this.size, this.size);
         this.ctx.putImageData(imageData, 0, 0);
+    }
+
+    createPicker() {
+        this.picker = document.getElementById('picker');
+        this.colorMap.forEach((color) => {
+            let colorPicker = document.createElement("div");
+            colorPicker.className = "color-picker";
+            console.log(Utilities.hexColorToString(color));
+            colorPicker.style.backgroundColor = Utilities.hexColorToString(color);
+            this.picker.appendChild(colorPicker);
+        });
     }
 };

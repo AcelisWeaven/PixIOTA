@@ -7,3 +7,11 @@
 export function addListeners(element, events, fn, useCapture = false) {
     events.split(' ').forEach(e => element.addEventListener(e, fn, useCapture));
 }
+
+export function hexColorToString(color) {
+    let r = Math.round(color % 256);
+    let g = Math.round(color / 256 % 256);
+    let b = Math.round(color / (256 * 256) % 256);
+    let a = Math.min(Math.round(color / (256 * 256 * 256) % 256) / 255, 1);
+    return `rgba(${r}, ${g}, ${b}, ${a})`;
+}
