@@ -3,7 +3,7 @@ const Utilities = require("./Utilities");
 
 module.exports = class Canvas {
     constructor() {
-        this.board = new Board(243);
+        this.board = new Board(243, this);
         this.resetCurrentScale();
 
         this.canvas = this.initCanvas();

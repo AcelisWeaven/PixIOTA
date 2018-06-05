@@ -1,8 +1,9 @@
 const Utilities = require("./Utilities");
 
 module.exports = class Board{
-    constructor(size) {
+    constructor(size, parent) {
         this.size = size;
+        this.parent = parent;
 
         this.canvas = document.createElement('canvas');
         this.canvas.width = size;
@@ -12,37 +13,44 @@ module.exports = class Board{
 
         this.init();
         this.createPicker();
+
+        setInterval(() => {
+            // Change a random pixel :)
+            for (let i = 0 ; i < 500 ; i++){
+                this.data[Math.floor(Math.random() * this.data.length)] = this.colorMap[Math.floor(Math.random() * this.colorMap.length)];
+            }
+            this.updateCtx();
+            this.parent.redraw();
+        }, 50)
     }
 
     init() {
         this.data = new Uint32Array(this.size * this.size);
         this.colorMap = [
-            0xfffcfcfc,
-            0xff1010ff,
-            0xff10ffff,
-            0xff10ff10,
-            0xffffff10,
-            0xffff1010,
-            0xffff10ff,
-            0xff1010a0,
-            0xff10a0a0,
-            0xff10a010,
-            0xffa0a010,
-            0xffa01010,
-            0xffa010a0,
-            0xff000000,
+            0XFFFCFCFC,
+            0XFF000000,
+            0XFF1010FF,
+            0XFF1088FF,
+            0XFF10FFFF,
+            0XFF10FF88,
+            0XFF10FF10,
+            0XFF88FF10,
+            0XFFFFFF10,
+            0XFFFFA308,
+            0XFFFF4700,
+            0XFFFF2C80,
+            0XFFFF10FF,
+            0XFF8810FF,
         ];
 
         for (let i = 0; i < this.size * this.size; ++i) {
-            this.data[i] = this.colorMap[Math.floor(Math.random() * this.colorMap.length)];
+            this.data[i] = this.colorMap[0];
         }
-        const iData = new Uint8ClampedArray(this.data.buffer);
-        const imageData = new ImageData(iData, this.size, this.size);
-        this.ctx.putImageData(imageData, 0, 0);
+        this.updateCtx();
     }
 
     createPicker() {
-        this.picker = document.getElementById('picker');
+        this.picker = document.querySelector('.color-picker-container');
         this.colorMap.forEach((color) => {
             let colorPicker = document.createElement("div");
             colorPicker.className = "color-picker";
@@ -50,5 +58,11 @@ module.exports = class Board{
             colorPicker.style.backgroundColor = Utilities.hexColorToString(color);
             this.picker.appendChild(colorPicker);
         });
+    }
+
+    updateCtx() {
+        const iData = new Uint8ClampedArray(this.data.buffer);
+        const imageData = new ImageData(iData, this.size, this.size);
+        this.ctx.putImageData(imageData, 0, 0);
     }
 };
