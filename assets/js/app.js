@@ -31,12 +31,12 @@ function initCanvas() {
 initCanvas();
 window.addEventListener("resize", () => {
     initCanvas();
-trackTransforms(ctx);
+    trackTransforms(ctx);
 
-lastX = canvas.width / 2;
-lastY = canvas.height / 2;
+    lastX = canvas.width / 2;
+    lastY = canvas.height / 2;
 
-zoom(currentScale);
+    zoom(currentScale);
 });
 
 const data = new Uint32Array(size * size);
@@ -220,17 +220,44 @@ function trackTransforms(ctx) {
         pt.x = x;
         pt.y = y;
         return pt.matrixTransform(xform.inverse());
-    }
+    };
+    ctx.reverseTransformedPoint = (x, y) => {
+        pt.x = x;
+        pt.y = y;
+        return pt.matrixTransform(xform);
+    };
 }
 
 trackTransforms(ctx);
 
+let previousDraw = {
+    x1: canvas.width / 2 - subcanvas.width / 2,
+    y1: canvas.height / 2 - subcanvas.height / 2,
+    x2: canvas.width / 2 - subcanvas.width / 2 + subcanvas.width,
+    y2: canvas.height / 2 - subcanvas.height / 2 + subcanvas.height,
+};
+
 function redraw() {
     /* Clear the entire canvas */
-    const p1 = ctx.transformedPoint(0, 0);
-    const p2 = ctx.transformedPoint(canvas.width, canvas.height);
-    ctx.clearRect(p1.x, p1.y, p2.x - p1.x, p2.y - p1.y);
+    const op1 = ctx.transformedPoint(previousDraw.x1, previousDraw.y1);
+    const op2 = ctx.transformedPoint(previousDraw.x2, previousDraw.y2);
+    const lineWidth = 1;
+    ctx.clearRect(op1.x, op1.y, op2.x - op1.x, op2.y - op1.y);
     ctx.drawImage(subcanvas, canvas.width / 2 - subcanvas.width / 2, canvas.height / 2 - subcanvas.height / 2);
+
+    const p1 = ctx.reverseTransformedPoint(canvas.width / 2 - subcanvas.width / 2 - lineWidth * 2, canvas.height / 2 - subcanvas.height / 2 - lineWidth * 2);
+    const p2 = ctx.reverseTransformedPoint(canvas.width / 2 + subcanvas.width / 2 + lineWidth * 2, canvas.height / 2 + subcanvas.height / 2 + lineWidth * 2);
+    previousDraw.x1 = p1.x;
+    previousDraw.y1 = p1.y;
+    previousDraw.x2 = p2.x;
+    previousDraw.y2 = p2.y;
+
+    // small stroke around the canvas
+    ctx.beginPath();
+    ctx.lineWidth = lineWidth;
+    ctx.lineJoin = "round";
+    ctx.strokeStyle = "#FFFFFF33";
+    ctx.strokeRect(canvas.width / 2 - subcanvas.width / 2 - lineWidth / 2, canvas.height / 2 - subcanvas.height / 2 - lineWidth / 2, subcanvas.width + lineWidth, subcanvas.height + lineWidth);
 }
 
 zoom(currentScale);
@@ -241,6 +268,6 @@ zoom(currentScale);
 ** @param {Function} fn - function to attach for each event as a listener
 ** @param {boolean} useCapture
 */
-function addListeners(element, events, fn, useCapture=false) {
+function addListeners(element, events, fn, useCapture = false) {
     events.split(' ').forEach(e => element.addEventListener(e, fn, useCapture));
 }
