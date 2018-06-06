@@ -16,7 +16,7 @@ module.exports = class Board{
 
         setInterval(() => {
             // Change a random pixel :)
-            for (let i = 0 ; i < 500 ; i++){
+            for (let i = 0 ; i < 5 ; i++){
                 this.data[Math.floor(Math.random() * this.data.length)] = this.colorMap[Math.floor(Math.random() * this.colorMap.length)];
             }
             this.updateCtx();
