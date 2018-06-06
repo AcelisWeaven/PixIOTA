@@ -1,6 +1,6 @@
 const Utilities = require("./Utilities");
 
-module.exports = class Board{
+module.exports = class Board {
     constructor(size, parent) {
         this.size = size;
         this.parent = parent;
@@ -16,7 +16,7 @@ module.exports = class Board{
 
         setInterval(() => {
             // Change a random pixel :)
-            for (let i = 0 ; i < 5 ; i++){
+            for (let i = 0; i < 5; i++) {
                 this.data[Math.floor(Math.random() * this.data.length)] = this.colorMap[Math.floor(Math.random() * this.colorMap.length)];
             }
             this.updateCtx();
@@ -53,12 +53,22 @@ module.exports = class Board{
 
     createPicker() {
         this.picker = document.querySelector('.color-picker-container');
+        this.currentColor = null;
         this.colorMap.forEach((color, colorIndex) => {
             let colorPicker = document.createElement("div");
-            colorPicker.className = "color-picker";
+            colorPicker.classList.add("color-picker");
             colorPicker.style.backgroundColor = Utilities.hexColorToString(color);
             colorPicker.setAttribute("data-color-index", colorIndex);
             this.picker.appendChild(colorPicker);
+
+            let _this = this;
+            Utilities.addListeners(colorPicker, "mouseup touchend", (e) => {
+                if (_this.currentColor) {
+                    _this.currentColor.classList.remove("active");
+                }
+                _this.currentColor = e.target;
+                _this.currentColor.classList.add("active");
+            });
         });
     }
 
