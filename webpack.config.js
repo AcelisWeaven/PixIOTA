@@ -1,6 +1,7 @@
 // webpack.config.js
 const Encore = require('@symfony/webpack-encore');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPolyfillIOPlugin = require('html-webpack-polyfill-io-plugin')
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 Encore
@@ -45,6 +46,13 @@ Encore
         inlineSource: '.(js|css)$',
         template: './assets/index.html',
         filename: './index.html' //relative to root of the application
+    }))
+
+    .addPlugin(new HtmlWebpackPolyfillIOPlugin({
+        features: [
+            'Promise',
+            'fetch',
+        ],
     }))
 ;
 
