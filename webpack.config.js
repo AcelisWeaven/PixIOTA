@@ -51,3 +51,5 @@ Encore
 
 // export the final configuration
 module.exports = Encore.getWebpackConfig();
+
+console.log("Server started on http://localhost:8080/");
