@@ -151,6 +151,10 @@ module.exports = class Canvas {
 
         // small stroke around the canvas
         this.ctx.strokeRect(this.canvas.width / 2 - this.board.canvas.width / 2 - this.lineWidth / 2, this.canvas.height / 2 - this.board.canvas.height / 2 - this.lineWidth / 2, this.board.canvas.width + this.lineWidth, this.board.canvas.height + this.lineWidth);
+
+        // TODO: needs to be done independently than redraw(), with proper logic and without redrawing the whole canvas
+        const pointerPt = this.ctx.transformedPoint(this.lastX, this.lastY);
+        this.ctx.fillRect(Math.round(pointerPt.x) - 0.5, Math.round(pointerPt.y) - 0.5, 1, 1,);
     }
 
     dragStartEvent(evt) {
