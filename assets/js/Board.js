@@ -57,7 +57,6 @@ module.exports = class Board {
         this.colorMap.forEach((color, colorIndex) => {
             let colorPicker = document.createElement("div");
             colorPicker.classList.add("color-picker");
-            colorPicker.style.backgroundColor = Utilities.hexColorToString(color);
             colorPicker.setAttribute("data-color-index", colorIndex);
             this.picker.appendChild(colorPicker);
 

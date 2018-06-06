@@ -1,26 +1,14 @@
 $breakpoint: 920px;
 $hueOffset: 5;
+$lightenPercent: 10%;
+@function calc-color($i) {
+        @return lighten(hsl($i * (360 / 14) + $hueOffset, 100%, 50%), 10%);
+}
 $colors: (
         #FCFCFC,
-        #000000,
-        hsl(0 * (360 / 14) + $hueOffset, 100%, 50%),
-        hsl(1 * (360 / 14) + $hueOffset, 100%, 50%),
-        hsl(2 * (360 / 14) + $hueOffset, 100%, 50%),
-        hsl(3 * (360 / 14) + $hueOffset, 100%, 50%),
-        hsl(4 * (360 / 14) + $hueOffset, 100%, 50%),
-        hsl(5 * (360 / 14) + $hueOffset, 100%, 50%),
-        hsl(6 * (360 / 14) + $hueOffset, 100%, 50%),
-        hsl(7 * (360 / 14) + $hueOffset, 100%, 50%),
-        hsl(8 * (360 / 14) + $hueOffset, 100%, 50%),
-        hsl(9 * (360 / 14) + $hueOffset, 100%, 50%),
-        hsl(10 * (360 / 14) + $hueOffset, 100%, 50%),
-        hsl(11 * (360 / 14) + $hueOffset, 100%, 50%),
-        hsl(12 * (360 / 14) + $hueOffset, 100%, 50%),
-        hsl(13 * (360 / 14) + $hueOffset, 100%, 50%),
+        lighten(#282828, $lightenPercent),
 );
 
-#debug {
-  @each $color in $colors {
-    background-color: $color;
-  }
+@for $i from 1 through 14 {
+  $colors: append($colors, calc-color($i - 1));
 }
