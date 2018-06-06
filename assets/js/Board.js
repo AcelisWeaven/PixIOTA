@@ -51,10 +51,11 @@ module.exports = class Board{
 
     createPicker() {
         this.picker = document.querySelector('.color-picker-container');
-        this.colorMap.forEach((color) => {
+        this.colorMap.forEach((color, colorIndex) => {
             let colorPicker = document.createElement("div");
             colorPicker.className = "color-picker";
             colorPicker.style.backgroundColor = Utilities.hexColorToString(color);
+            colorPicker.setAttribute("data-color-index", colorIndex);
             this.picker.appendChild(colorPicker);
         });
     }
