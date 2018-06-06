@@ -15,7 +15,7 @@ Encore
 
     .enablePostCssLoader()
 
-    .configureBabel(function(babelConfig) {
+    .configureBabel(function (babelConfig) {
         // add additional presets
         babelConfig.presets.push('es2017');
 
@@ -46,8 +46,13 @@ Encore
         template: './assets/index.html',
         filename: './index.html' //relative to root of the application
     }))
-    .addPlugin(new HtmlWebpackInlineSourcePlugin())
 ;
+
+if (Encore.isProduction()) {
+    Encore
+        .addPlugin(new HtmlWebpackInlineSourcePlugin())
+    ;
+}
 
 // export the final configuration
 module.exports = Encore.getWebpackConfig();
