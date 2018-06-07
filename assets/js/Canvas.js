@@ -14,6 +14,7 @@ module.exports = class Canvas {
         this.lastX = this.canvas.width / 2;
         this.lastY = this.canvas.height / 2;
         this.dragStart = false;
+        this.dragStartedPos = null;
         this.scalingStart = false;
         this.pinchDist = 0;
 
@@ -84,7 +85,8 @@ module.exports = class Canvas {
 
         Utilities.addListeners(this.canvas, 'mousedown touchstart', this.dragStartEvent.bind(this), false);
         Utilities.addListeners(this.canvas, 'mousemove touchmove', this.dragMoveEvent.bind(this), false);
-        Utilities.addListeners(this.canvas, 'mouseup mouseleave touchend touchcancel touchleave', this.dragEndEvent.bind(this), false);
+        Utilities.addListeners(this.canvas, 'mouseleave touchcancel touchleave', this.dragEndEvent.bind(this), false);
+        Utilities.addListeners(this.canvas, 'mouseup touchend', this.touchEndEvent.bind(this), false);
     }
 
     trackTransforms(ctx) {
@@ -182,6 +184,7 @@ module.exports = class Canvas {
         this.lastX = evt.offsetX || (evt.pageX - this.canvas.offsetLeft);
         this.lastY = evt.offsetY || (evt.pageY - this.canvas.offsetTop);
         this.dragStart = this.ctx.transformedPoint(this.lastX, this.lastY);
+        this.dragStartedPos = {x: evt.pageX, y: evt.pageY};
     }
 
     dragMoveEvent(evt) {
@@ -216,8 +219,17 @@ module.exports = class Canvas {
     }
 
     dragEndEvent(evt) {
+        this.dragStartedPos = null;
         this.dragStart = null;
         this.scalingStart = false;
+    }
+
+    touchEndEvent(evt) {
+        if (this.dragStartedPos && this.dragStartedPos.x === evt.pageX && this.dragStartedPos.y === evt.pageY) {
+            // AH! It was actually a click
+            console.log("AH! It was actually a click");
+        }
+        this.dragEndEvent(evt);
     }
 
     handleScroll(evt) {
