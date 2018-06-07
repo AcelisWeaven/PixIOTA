@@ -127,7 +127,8 @@ html, body {
   position: relative;
   grid-area: content;
   overflow: hidden;
-  background: linear-gradient(127deg, rgba(0, 255, 90, 0.8), rgba(0, 255, 0, 0) 70.71%), linear-gradient(336deg, rgba(0, 208, 255, 0.8), white 70.71%);
+  background: linear-gradient(127deg, rgba(0, 255, 90, 0.8), rgba(0, 255, 0, 0) 70.71%),
+  linear-gradient(336deg, rgba(0, 208, 255, 0.8), white 70.71%);
 }
 
 .canvas-wrapper {
@@ -145,6 +146,35 @@ html, body {
   image-rendering: pixelated;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
+}
+
+.preview-pixel {
+  display: none;
+  position: absolute;
+  transition: top 50ms linear, left 50ms linear, height 100ms linear, width 100ms linear;
+  box-shadow: 0 4px 9px 0 rgba(black, 0.13), 0 0 30px rgba(white, 0.18) inset;
+  pointer-events: none;
+
+  &:after {
+    content: '';
+    display: block;
+    position: relative;
+    top: -30px;
+    left: -30px;
+    width: calc(100% + 40px);
+    height: calc(100% + 40px);
+    border: 10px solid transparent;
+    border-radius: 100%;
+    border-left-color: rgba(114, 134, 122, 0.83);
+    border-right-color: rgba(114, 134, 122, 0.83);
+    animation: spin 4s infinite;
+  }
+}
+
+@keyframes spin {
+  50%, 100% {
+    transform: rotate(360deg);
+  }
 }
 
 .footer {
