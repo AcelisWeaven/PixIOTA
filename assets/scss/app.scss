@@ -169,6 +169,10 @@ html, body {
     border-right-color: rgba(114, 134, 122, 0.83);
     animation: spin 4s infinite;
   }
+
+  &.locked {
+    transition-duration: 0s;
+  }
 }
 
 @keyframes spin {

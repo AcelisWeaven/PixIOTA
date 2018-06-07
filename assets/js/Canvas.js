@@ -239,6 +239,8 @@ module.exports = class Canvas {
 
                 // TODO: Do something with the board pos
                 console.log(this.previewPixelLockBoardPos);
+
+                this.previewPixel.classList.add('locked');
             }
         }
         this.dragEndEvent(evt);
