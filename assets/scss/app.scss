@@ -187,6 +187,11 @@ html, body {
   &.no-transition {
     transition-duration: 0s;
   }
+
+  &.bump {
+    // WIP
+    animation: bump 300ms ease-in-out;
+  }
 }
 
 @keyframes spin {
