@@ -17,6 +17,13 @@ html, body {
 
 .header {
   grid-area: header;
+  display: flex;
+}
+
+#logo {
+  height: 18px;
+  fill: white;
+  margin: 5px;
 }
 
 .picker {
@@ -129,6 +136,12 @@ html, body {
   overflow: hidden;
   background: linear-gradient(127deg, rgba(0, 255, 90, 0.8), rgba(0, 255, 0, 0) 70.71%),
   linear-gradient(336deg, rgba(0, 208, 255, 0.8), white 70.71%);
+
+  &.dragged {
+    .preview-pixel.locked {
+      transition-duration: 0s;
+    }
+  }
 }
 
 .canvas-wrapper {
@@ -151,7 +164,7 @@ html, body {
 .preview-pixel {
   display: none;
   position: absolute;
-  transition: top 50ms linear, left 50ms linear;
+  transition: top 50ms linear, left 50ms linear, background-color 150ms linear;
   box-shadow: 0 4px 9px 0 rgba(black, 0.13), 0 0 30px rgba(white, 0.18) inset;
   pointer-events: none;
 
@@ -170,12 +183,20 @@ html, body {
     animation: spin 4s infinite;
   }
 
-  &.locked {
+  &.no-transition {
     transition-duration: 0s;
   }
 }
 
 @keyframes spin {
+  0%, 100% {
+    border-left-color: #34ff7c;
+    border-right-color: #34ff7c;
+  }
+  50% {
+    border-left-color: #0ab3d9;
+    border-right-color: #0ab3d9;
+  }
   50%, 100% {
     transform: rotate(360deg);
   }

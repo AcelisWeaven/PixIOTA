@@ -25,6 +25,8 @@ module.exports = class Canvas {
         this.previewPixel = document.querySelector(".preview-pixel");
         this.previewPixelLockBoardPos = null;
         this.updatePixelPreview();
+
+        this.contentElem = document.querySelector(".content");
     }
 
     initCanvas() {
@@ -137,6 +139,14 @@ module.exports = class Canvas {
         if (this.currentScale * factor > 16 && this.currentScale * factor < 512) {
             this.ctx.scale(factor, factor);
             this.currentScale *= factor;
+
+            if (this.previewPixel) {
+                // temporary disable transitions on previewPixel
+                this.previewPixel.classList.add("no-transition");
+                setTimeout(() => {
+                    this.previewPixel.classList.remove("no-transition");
+                }, 50);
+            }
         }
         this.ctx.translate(-pt.x, -pt.y);
         this.redraw();
@@ -213,6 +223,7 @@ module.exports = class Canvas {
         this.lastX = evt.offsetX || (evt.pageX - this.canvas.offsetLeft);
         this.lastY = evt.offsetY || (evt.pageY - this.canvas.offsetTop);
         if (this.dragStart) {
+            this.contentElem.classList.add("dragged");
             const pt = this.ctx.transformedPoint(this.lastX, this.lastY);
             this.ctx.translate(pt.x - this.dragStart.x, pt.y - this.dragStart.y);
             this.redraw();
@@ -221,6 +232,7 @@ module.exports = class Canvas {
     }
 
     dragEndEvent(evt) {
+        this.contentElem.classList.remove("dragged");
         this.dragStartedPos = null;
         this.dragStart = null;
         this.scalingStart = false;
