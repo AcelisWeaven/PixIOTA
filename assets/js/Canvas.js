@@ -23,6 +23,7 @@ module.exports = class Canvas {
         this.zoom(this.currentScale);
 
         this.previewPixel = document.querySelector(".preview-pixel");
+        this.previewPixelLockBoardPos = null;
         this.updatePixelPreview();
     }
 
@@ -227,8 +228,18 @@ module.exports = class Canvas {
 
     touchEndEvent(evt) {
         if (this.dragStartedPos && this.dragStartedPos.x === evt.pageX && this.dragStartedPos.y === evt.pageY) {
-            // AH! It was actually a click
-            console.log("AH! It was actually a click");
+            // Lock the previewColor at the clicked position
+            if (this.previewPixel.style.display) {
+                this.previewPixelLockBoardPos = ((pt) => {
+                    return {
+                        x: Math.round(pt.x + this.board.canvas.width / 2 - Math.round(this.canvas.width / 2) - this.lineWidth / 2),
+                        y: Math.round(pt.y + this.board.canvas.height / 2 - Math.round(this.canvas.height / 2) - this.lineWidth / 2),
+                    }
+                })(this.ctx.transformedPoint(this.lastX, this.lastY));
+
+                // TODO: Do something with the board pos
+                console.log(this.previewPixelLockBoardPos);
+            }
         }
         this.dragEndEvent(evt);
     }
@@ -248,10 +259,19 @@ module.exports = class Canvas {
     updatePixelPreview() {
         const cursorPos = ((pointerPt) => {
             return {
-                begin: this.ctx.reverseTransformedPoint(Math.round(pointerPt.x) - 1, Math.round(pointerPt.y) - 1),
-                end: this.ctx.reverseTransformedPoint(Math.round(pointerPt.x), Math.round(pointerPt.y))
+                begin: this.ctx.reverseTransformedPoint(Math.round(pointerPt.x + this.lineWidth / 2) - 1, Math.round(pointerPt.y + this.lineWidth / 2) - 1),
+                end: this.ctx.reverseTransformedPoint(Math.round(pointerPt.x + this.lineWidth / 2), Math.round(pointerPt.y + this.lineWidth / 2))
             };
-        })(this.ctx.transformedPoint(this.lastX, this.lastY));
+        })((() => {
+            if (this.previewPixelLockBoardPos) {
+                return {
+                    x: this.previewPixelLockBoardPos.x + Math.round(this.canvas.width / 2) - this.board.canvas.width / 2,
+                    y: this.previewPixelLockBoardPos.y + Math.round(this.canvas.height / 2) - this.board.canvas.height / 2
+                };
+            } else {
+                return this.ctx.transformedPoint(this.lastX, this.lastY)
+            }
+        })());
         this.previewPixel.style.left = `${Math.round(cursorPos.begin.x)}px`;
         this.previewPixel.style.top = `${Math.round(cursorPos.begin.y)}px`;
         this.previewPixel.style.width = `${Math.round(cursorPos.end.x - cursorPos.begin.x)}px`
