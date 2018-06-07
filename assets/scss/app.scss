@@ -159,13 +159,14 @@ html, body {
   image-rendering: pixelated;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
+  width: 100%;
+  height: 100%;
 }
 
 .preview-pixel {
   display: none;
   position: absolute;
   transition: top 50ms linear, left 50ms linear, background-color 150ms linear;
-  box-shadow: 0 4px 9px 0 rgba(black, 0.13), 0 0 30px rgba(white, 0.18) inset;
   pointer-events: none;
 
   &:after {

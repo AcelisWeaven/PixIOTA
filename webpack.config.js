@@ -53,6 +53,7 @@ Encore
             'Promise',
             'fetch',
         ],
+        callback: 'runPixIOTA',
     }))
 ;
 
