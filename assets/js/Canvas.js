@@ -195,6 +195,7 @@ module.exports = class Canvas {
                 evt.touches[0].pageX - evt.touches[1].pageX,
                 evt.touches[0].pageY - evt.touches[1].pageY);
             this.zoom(Math.round((newPinchDist - this.pinchDist) * 100) / 800);
+            this.updatePixelPreview();
             this.pinchDist = newPinchDist;
             return;
         }
