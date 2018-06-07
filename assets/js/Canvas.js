@@ -11,8 +11,8 @@ module.exports = class Canvas {
         this.resetCanvas();
 
         // global variables, needs to be renamed
-        this.lastX = this.canvas.width / 2;
-        this.lastY = this.canvas.height / 2;
+        this.lastX = Math.round(this.canvas.width / 2);
+        this.lastY = Math.round(this.canvas.height / 2);
         this.dragStart = false;
         this.dragStartedPos = null;
         this.scalingStart = false;
@@ -54,10 +54,10 @@ module.exports = class Canvas {
         this.ctx.strokeStyle = "#FFFFFF33";
 
         this.previousDraw = {
-            x1: this.canvas.width / 2 - this.board.canvas.width / 2,
-            y1: this.canvas.height / 2 - this.board.canvas.height / 2,
-            x2: this.canvas.width / 2 - this.board.canvas.width / 2 + this.board.canvas.width,
-            y2: this.canvas.height / 2 - this.board.canvas.height / 2 + this.board.canvas.height,
+            x1: Math.round(this.canvas.width / 2) - this.board.canvas.width / 2,
+            y1: Math.round(this.canvas.height / 2) - this.board.canvas.height / 2,
+            x2: Math.round(this.canvas.width / 2) - this.board.canvas.width / 2 + this.board.canvas.width,
+            y2: Math.round(this.canvas.height / 2) - this.board.canvas.height / 2 + this.board.canvas.height,
         };
 
         this.resetCurrentScale();
@@ -71,8 +71,8 @@ module.exports = class Canvas {
         this.resetCanvas();
         this.trackTransforms(this.ctx);
 
-        this.lastX = this.canvas.width / 2;
-        this.lastY = this.canvas.height / 2;
+        this.lastX = Math.round(this.canvas.width / 2);
+        this.lastY = Math.round(this.canvas.height / 2);
 
         this.zoom(this.currentScale);
         this.updatePixelPreview();
@@ -146,17 +146,17 @@ module.exports = class Canvas {
         const op1 = this.ctx.transformedPoint(this.previousDraw.x1, this.previousDraw.y1);
         const op2 = this.ctx.transformedPoint(this.previousDraw.x2, this.previousDraw.y2);
         this.ctx.clearRect(op1.x, op1.y, op2.x - op1.x, op2.y - op1.y);
-        this.ctx.drawImage(this.board.canvas, this.canvas.width / 2 - this.board.canvas.width / 2, this.canvas.height / 2 - this.board.canvas.height / 2);
+        this.ctx.drawImage(this.board.canvas, Math.round(this.canvas.width / 2) - this.board.canvas.width / 2, Math.round(this.canvas.height / 2) - this.board.canvas.height / 2);
 
-        const p1 = this.ctx.reverseTransformedPoint(this.canvas.width / 2 - this.board.canvas.width / 2 - this.lineWidth * 2, this.canvas.height / 2 - this.board.canvas.height / 2 - this.lineWidth * 2);
-        const p2 = this.ctx.reverseTransformedPoint(this.canvas.width / 2 + this.board.canvas.width / 2 + this.lineWidth * 2, this.canvas.height / 2 + this.board.canvas.height / 2 + this.lineWidth * 2);
+        const p1 = this.ctx.reverseTransformedPoint(Math.round(this.canvas.width / 2) - this.board.canvas.width / 2 - this.lineWidth * 2, Math.round(this.canvas.height / 2) - this.board.canvas.height / 2 - this.lineWidth * 2);
+        const p2 = this.ctx.reverseTransformedPoint(Math.round(this.canvas.width / 2) + this.board.canvas.width / 2 + this.lineWidth * 2, Math.round(this.canvas.height / 2) + this.board.canvas.height / 2 + this.lineWidth * 2);
         this.previousDraw.x1 = p1.x;
         this.previousDraw.y1 = p1.y;
         this.previousDraw.x2 = p2.x;
         this.previousDraw.y2 = p2.y;
 
         // small stroke around the canvas
-        this.ctx.strokeRect(this.canvas.width / 2 - this.board.canvas.width / 2 - this.lineWidth / 2, this.canvas.height / 2 - this.board.canvas.height / 2 - this.lineWidth / 2, this.board.canvas.width + this.lineWidth, this.board.canvas.height + this.lineWidth);
+        this.ctx.strokeRect(Math.round(this.canvas.width / 2) - this.board.canvas.width / 2 - this.lineWidth / 2, Math.round(this.canvas.height / 2) - this.board.canvas.height / 2 - this.lineWidth / 2, this.board.canvas.width + this.lineWidth, this.board.canvas.height + this.lineWidth);
     }
 
     dragStartEvent(evt) {
@@ -248,8 +248,8 @@ module.exports = class Canvas {
     updatePixelPreview() {
         const cursorPos = ((pointerPt) => {
             return {
-                begin: this.ctx.reverseTransformedPoint(Math.round(pointerPt.x) - 0.5, Math.round(pointerPt.y) - 0.5),
-                end: this.ctx.reverseTransformedPoint(Math.round(pointerPt.x) + 0.5, Math.round(pointerPt.y) + 0.5)
+                begin: this.ctx.reverseTransformedPoint(Math.round(pointerPt.x) - 1, Math.round(pointerPt.y) - 1),
+                end: this.ctx.reverseTransformedPoint(Math.round(pointerPt.x), Math.round(pointerPt.y))
             };
         })(this.ctx.transformedPoint(this.lastX, this.lastY));
         this.previewPixel.style.left = `${Math.round(cursorPos.begin.x)}px`;
