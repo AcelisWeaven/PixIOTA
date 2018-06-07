@@ -239,20 +239,26 @@ module.exports = class Canvas {
     }
 
     touchEndEvent(evt) {
-        if (this.dragStartedPos && this.dragStartedPos.x === evt.pageX && this.dragStartedPos.y === evt.pageY) {
+        if (this.dragStartedPos &&
+            Utilities.getDistance(this.dragStartedPos.x, this.dragStartedPos.y, evt.pageX, evt.pageY) < 10
+        ) {
             // Lock the previewColor at the clicked position
             if (this.previewPixel.style.display) {
                 this.previewPixelLockBoardPos = ((pt) => {
-                    return {
+                    const boardPt = {
                         x: Math.round(pt.x + this.board.canvas.width / 2 - Math.round(this.canvas.width / 2) - this.lineWidth / 2),
                         y: Math.round(pt.y + this.board.canvas.height / 2 - Math.round(this.canvas.height / 2) - this.lineWidth / 2),
-                    }
+                    };
+                    if (boardPt.x < 0 || boardPt.x >= this.board.size || boardPt.y < 0 || boardPt.y >= this.board.size)
+                        return null;
+                    return boardPt;
                 })(this.ctx.transformedPoint(this.lastX, this.lastY));
 
                 // TODO: Do something with the board pos
                 console.log(this.previewPixelLockBoardPos);
 
                 this.previewPixel.classList.add('locked');
+                this.updatePixelPreview();
             }
         }
         this.dragEndEvent(evt);

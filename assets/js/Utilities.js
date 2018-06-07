@@ -15,3 +15,13 @@ export function hexColorToString(color) {
     let a = Math.min(Math.round(color / (256 * 256 * 256) % 256) / 255, 1);
     return `rgba(${r}, ${g}, ${b}, ${a})`;
 }
+
+export function getDistance(x1, y1, x2, y2) {
+    let xs = x2 - x1,
+        ys = y2 - y1;
+
+    xs *= xs;
+    ys *= ys;
+
+    return Math.sqrt(xs + ys);
+}
