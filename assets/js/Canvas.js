@@ -21,6 +21,7 @@ module.exports = class Canvas {
 
         this.registerEvents();
         this.trackTransforms(this.ctx);
+        this.lastCurrentScale = 1;
         this.zoom(this.currentScale);
 
         this.previewPixel = document.querySelector(".preview-pixel");
@@ -29,12 +30,10 @@ module.exports = class Canvas {
 
         this.contentElem = document.querySelector(".content");
 
-        /*
         // Keeping this here for debug purposes: draws a full-rainbowed canvas
         for (let i = 0; i < size * size; ++i) {
             this.board.drawPixel(i % size, Math.trunc(i / size), i % this.board.colorMap.length, i === size * size - 1);
         }
-        */
     }
 
     initCanvas() {
@@ -75,7 +74,7 @@ module.exports = class Canvas {
     }
 
     resetCurrentScale() {
-        this.currentScale = 10;
+        this.currentScale = 2;
     }
 
     resizeEvent() {
@@ -132,9 +131,11 @@ module.exports = class Canvas {
         const pt = this.ctx.transformedPoint(this.lastX, this.lastY);
         this.ctx.translate(pt.x, pt.y);
         const factor = scaleFactor ** clicks;
-        if (this.currentScale * factor > 16 && this.currentScale * factor < 512) {
-            this.ctx.scale(factor, factor);
+        if (this.currentScale * factor >= 1 && this.currentScale * factor < 256) {
+            this.ctx.scale(1 / this.lastCurrentScale, 1 / this.lastCurrentScale);
             this.currentScale *= factor;
+            this.lastCurrentScale = Math.round(this.currentScale);
+            this.ctx.scale(this.lastCurrentScale, this.lastCurrentScale);
 
             if (this.previewPixel) {
                 // temporary disable transitions on previewPixel
