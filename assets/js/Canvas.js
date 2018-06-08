@@ -1,10 +1,12 @@
-const Board = require("./Board.js");
 const Utilities = require("./Utilities");
+const Board = require("./Board.js");
+const ProjectBar = require("./ProjectBar.js");
 
 module.exports = class Canvas {
     constructor() {
         const size = 256;
         this.board = new Board(size, this);
+        this.projectBar = new ProjectBar(this);
         this.resetCurrentScale();
 
         this.canvas = this.initCanvas();
