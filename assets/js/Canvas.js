@@ -205,8 +205,7 @@ module.exports = class Canvas {
                 pageY: evt.targetTouches[0].pageY,
             }
         }
-        this.lastX = evt.offsetX || (evt.pageX - this.canvas.offsetLeft);
-        this.lastY = evt.offsetY || (evt.pageY - this.canvas.offsetTop);
+        this.updateLast(evt);
         this.dragStart = this.ctx.transformedPoint(this.lastX, this.lastY);
         this.dragStartedPos = {x: evt.pageX, y: evt.pageY};
     }
@@ -233,8 +232,7 @@ module.exports = class Canvas {
                 pageY: evt.targetTouches[0].pageY,
             }
         }
-        this.lastX = evt.offsetX || (evt.pageX - this.canvas.offsetLeft);
-        this.lastY = evt.offsetY || (evt.pageY - this.canvas.offsetTop);
+        this.updateLast(evt);
         if (this.dragStart) {
             this.contentElem.classList.add("dragged");
             const pt = this.ctx.transformedPoint(this.lastX, this.lastY);
@@ -242,6 +240,12 @@ module.exports = class Canvas {
             this.redraw();
         }
         this.updatePixelPreview();
+    }
+
+
+    updateLast(evt) {
+        this.lastX = (evt.offsetX !== "undefined" ? evt.offsetX : evt.pageX - this.canvas.offsetLeft);
+        this.lastY = (evt.offsetY !== "undefined" ? evt.offsetY : evt.pageY - this.canvas.offsetTop);
     }
 
     dragEndEvent(evt) {
@@ -310,6 +314,7 @@ module.exports = class Canvas {
                     y: this.previewPixelLockBoardPos.y + Math.round(this.canvas.height / 2) - this.board.canvas.height / 2
                 };
             } else {
+                console.log("update -- ", this.lastX, this.lastY);
                 return this.ctx.transformedPoint(this.lastX, this.lastY)
             }
         })());
