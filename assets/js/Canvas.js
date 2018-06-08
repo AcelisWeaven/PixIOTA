@@ -23,7 +23,6 @@ module.exports = class Canvas {
 
         this.registerEvents();
         this.trackTransforms(this.ctx);
-        this.lastCurrentScale = 1;
         this.zoom(this.currentScale);
 
         this.previewPixel = document.querySelector(".preview-pixel");
@@ -76,12 +75,14 @@ module.exports = class Canvas {
     }
 
     resetCurrentScale() {
+        this.lastCurrentScale = 1;
         this.currentScale = 2;
     }
 
     resizeEvent() {
         this.resetCanvas();
         this.trackTransforms(this.ctx);
+        this.resetCurrentScale();
 
         this.lastX = Math.round(this.canvas.width / 2);
         this.lastY = Math.round(this.canvas.height / 2);
@@ -91,6 +92,7 @@ module.exports = class Canvas {
     }
 
     registerEvents() {
+        // FIXME: There is a bug when a resize is triggered by android (when hiding address bar)
         window.addEventListener("resize", this.resizeEvent.bind(this));
 
         Utilities.addListeners(this.canvas, 'DOMMouseScroll mousewheel', this.handleScroll.bind(this), false);

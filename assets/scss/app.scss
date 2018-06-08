@@ -1,7 +1,7 @@
 @import "variables";
 
 * {
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 html {
@@ -54,7 +54,7 @@ html, body {
   .label {
     $padding: 20px;
     flex: 1 0 calc(#{$label-width} - #{$padding * 2});
-    padding: $padding;
+    padding: 10px $padding;
 
     @media only screen and (max-width: $breakpoint) {
       flex: 1 0 100%;
@@ -270,4 +270,22 @@ html, body {
 
 .grid-container > div {
   padding: 0;
+}
+
+.project-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  color: black;
+  box-shadow: 0 10px 24px 10px #0000001a;
+  padding: 10px 40px;
+  transition: transform 100ms linear, box-shadow 100ms linear;
+  transform: translateY(0);
+
+  &.hidden {
+    box-shadow: none;
+    transform: translateY(100%);
+  }
 }
