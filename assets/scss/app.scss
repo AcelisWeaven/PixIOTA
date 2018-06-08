@@ -179,7 +179,7 @@ html, body {
   linear-gradient(336deg, rgba(0, 208, 255, 0.8), white 70.71%);
 
   &.dragged {
-    .preview-pixel.locked {
+    .preview-pixel {
       transition-duration: 0s;
     }
   }
