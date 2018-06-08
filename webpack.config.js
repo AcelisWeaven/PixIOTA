@@ -5,6 +5,7 @@ const HtmlWebpackPolyfillIOPlugin = require('html-webpack-polyfill-io-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 Encore
 // the project directory where all compiled assets will be stored
@@ -69,6 +70,21 @@ Encore
                 sizes: [96, 128, 192, 256, 384, 512]
             },
         ]
+    }))
+
+    .addPlugin(new FaviconsWebpackPlugin({
+        logo: './assets/img/icon.png',
+        persistentCache: true,
+        title: 'PixIOTA',
+        icons: {
+            android: true,
+            appleIcon: true,
+            favicons: true,
+            firefox: true,
+            opengraph: true,
+            twitter: true,
+            windows: true
+        }
     }))
 ;
 
