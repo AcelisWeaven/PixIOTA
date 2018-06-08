@@ -314,7 +314,6 @@ module.exports = class Canvas {
                     y: this.previewPixelLockBoardPos.y + Math.round(this.canvas.height / 2) - this.board.canvas.height / 2
                 };
             } else {
-                console.log("update -- ", this.lastX, this.lastY);
                 return this.ctx.transformedPoint(this.lastX, this.lastY)
             }
         })());
