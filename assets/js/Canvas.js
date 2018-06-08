@@ -3,7 +3,8 @@ const Utilities = require("./Utilities");
 
 module.exports = class Canvas {
     constructor() {
-        this.board = new Board(256, this);
+        const size = 256;
+        this.board = new Board(size, this);
         this.resetCurrentScale();
 
         this.canvas = this.initCanvas();
@@ -27,6 +28,13 @@ module.exports = class Canvas {
         this.updatePixelPreview();
 
         this.contentElem = document.querySelector(".content");
+
+        /*
+        // Keeping this here for debug purposes: draws a full-rainbowed canvas
+        for (let i = 0; i < size * size; ++i) {
+            this.board.drawPixel(i % size, Math.trunc(i / size), i % this.board.colorMap.length, i === size * size - 1);
+        }
+        */
     }
 
     initCanvas() {
@@ -254,10 +262,10 @@ module.exports = class Canvas {
                     return boardPt;
                 })(this.ctx.transformedPoint(this.lastX, this.lastY));
 
-                // TODO: Do something with the board pos
-                console.log(this.previewPixelLockBoardPos);
-
                 if (this.previewPixelLockBoardPos) {
+                    // TODO: This line is for debug purposes, remove me later
+                    this.board.drawPixel(this.previewPixelLockBoardPos.x, this.previewPixelLockBoardPos.y, this.board.currentColor.getAttribute("data-color-index"));
+
                     this.previewPixel.classList.remove('bump');
                     setTimeout(() => {
                         this.previewPixel.classList.add('bump');

@@ -14,14 +14,22 @@ module.exports = class Board {
         this.init();
         this.createPicker();
 
-        setInterval(() => {
-            // Change a random pixel :)
-            for (let i = 0; i < 5; i++) {
-                this.data[Math.floor(Math.random() * this.data.length)] = this.colorMap[Math.floor(Math.random() * this.colorMap.length)];
-            }
+        // setInterval(() => {
+        //     // Change a random pixel :)
+        //     for (let i = 0; i < 5; i++) {
+        //         this.data[Math.floor(Math.random() * this.data.length)] = this.colorMap[Math.floor(Math.random() * this.colorMap.length)];
+        //     }
+        //     this.updateCtx();
+        //     this.parent.redraw();
+        // }, 50)
+    }
+
+    drawPixel(x, y, colorId, redraw = true) {
+        this.data[y * this.size + x] = this.colorMap[colorId];
+        if (redraw) {
             this.updateCtx();
             this.parent.redraw();
-        }, 50)
+        }
     }
 
     init() {
