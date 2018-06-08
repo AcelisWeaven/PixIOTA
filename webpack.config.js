@@ -79,11 +79,14 @@ Encore
         icons: {
             android: true,
             appleIcon: true,
+            appleStartup: false,
+            coast: false,
             favicons: true,
-            firefox: true,
-            opengraph: true,
-            twitter: true,
-            windows: true
+            firefox: false,
+            opengraph: false,
+            twitter: false,
+            yandex: false,
+            windows: false
         }
     }))
 ;
