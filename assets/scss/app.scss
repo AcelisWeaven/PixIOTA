@@ -312,3 +312,28 @@ html, body {
     transform: translateY(100%);
   }
 }
+
+[data-more] {
+  position: relative;
+
+  &:after {
+    content: attr(data-more);
+    position: absolute;
+    display: block;
+    bottom: 90%;
+    left: 5px;
+    right: 5px;
+    background-color: #2f3a43;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: bottom 150ms ease-out, opacity 200ms ease-out;
+  }
+
+  &:hover:after {
+    opacity: 1;
+    bottom: 100%;
+  }
+}

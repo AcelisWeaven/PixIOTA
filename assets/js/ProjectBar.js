@@ -1,3 +1,5 @@
+const Utilities = require("./Utilities");
+
 module.exports = class Board {
     constructor(parent) {
         this.parent = parent;
@@ -6,19 +8,41 @@ module.exports = class Board {
 
         // mock API call
         setTimeout(() => {
-            this.projects = {
-                "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA": "PixIOTA Test 1",
-                "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB": "Pixel Brawl, creator of FGPAs dedicated to writing super long texts just for testing purposes",
-            };
+            this.projects = [
+                {
+                    address: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    project: "PixIOTA Test 1",
+                },
+                {
+                    address: "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+                    project: "PixIOTA Test 2, creator of FGPAs dedicated to writing super long texts just for testing purposes"
+                },
+                {
+                    address: "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+                    project: "PixIOTA Test 3",
+                },
+                {
+                    address: "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+                    project: "PixIOTA Test 4",
+                },
+                {
+                    address: "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+                    project: "PixIOTA Test 5",
+                },
+            ];
             this.updateProjects();
-        }, 1000);
+        }, 500);
     }
 
     updateProjects() {
-        Object.entries(this.projects).forEach(([project, address]) => {
+        console.log(this.projects);
+        this.projects = Utilities.shuffleArray(this.projects);
+        console.log(this.projects);
+        this.projects.forEach((item) => {
+            console.log(item);
             let elem = document.createElement("option");
-            elem.value = project;
-            elem.innerText = address;
+            elem.value = item.address;
+            elem.innerText = item.project;
             this.selector.appendChild(elem);
         });
         this.selector.classList.remove("hidden");

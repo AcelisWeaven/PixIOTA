@@ -25,3 +25,10 @@ export function getDistance(x1, y1, x2, y2) {
 
     return Math.sqrt(xs + ys);
 }
+
+export function shuffleArray(arr) {
+    return arr
+        .map(a => [Math.random(), a])
+        .sort((a, b) => a[0] - b[0])
+        .map(a => a[1]);
+}
