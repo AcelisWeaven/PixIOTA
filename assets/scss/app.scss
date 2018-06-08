@@ -189,8 +189,16 @@ html, body {
   }
 
   &.bump {
-    // WIP
-    animation: bump 300ms ease-in-out;
+    animation: bump 200ms ease-in-out;
+  }
+}
+
+@keyframes bump {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
   }
 }
 

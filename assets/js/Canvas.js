@@ -258,6 +258,11 @@ module.exports = class Canvas {
                 console.log(this.previewPixelLockBoardPos);
 
                 this.previewPixel.classList.add('locked');
+
+                this.previewPixel.classList.remove('bump');
+                setTimeout(() => {
+                    this.previewPixel.classList.add('bump');
+                }, 10);
                 this.updatePixelPreview();
             }
         }
