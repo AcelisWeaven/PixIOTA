@@ -205,11 +205,11 @@ html, body {
 }
 
 .preview-pixel {
-  display: none;
   position: absolute;
-  transition: top 50ms linear, left 50ms linear, background-color 150ms linear, box-shadow 100ms linear;
+  transition: top 50ms linear, left 50ms linear, background-color 150ms linear, box-shadow 100ms linear, opacity 300ms linear;
   pointer-events: none;
   box-shadow: 0 3px 8px 1px #0000001f;
+  opacity: 0;
 
   &:after {
     $border-width: 10px;
@@ -238,6 +238,11 @@ html, body {
 
   &.locked {
     box-shadow: none;
+    opacity: 1;
+  }
+
+  &.shown.active {
+    opacity: 1;
   }
 }
 

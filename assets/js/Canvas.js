@@ -101,6 +101,18 @@ module.exports = class Canvas {
         Utilities.addListeners(this.canvas, 'mousemove touchmove', this.dragMoveEvent.bind(this), false);
         Utilities.addListeners(this.canvas, 'mouseleave touchcancel touchleave', this.dragEndEvent.bind(this), false);
         Utilities.addListeners(this.canvas, 'mouseup touchend', this.touchEndEvent.bind(this), false);
+
+        Utilities.addListeners(this.canvas, 'mouseenter touchenter', this.hoverStartEvent.bind(this), false);
+        Utilities.addListeners(this.canvas, 'mouseleave touchcancel touchleave', this.hoverEndEvent.bind(this), false);
+    }
+
+
+    hoverStartEvent() {
+        this.previewPixel.classList.add("shown");
+    }
+
+    hoverEndEvent() {
+        this.previewPixel.classList.remove("shown");
     }
 
     trackTransforms(ctx) {
@@ -244,7 +256,7 @@ module.exports = class Canvas {
             Utilities.getDistance(this.dragStartedPos.x, this.dragStartedPos.y, evt.pageX, evt.pageY) < 10
         ) {
             // Lock the previewColor at the clicked position
-            if (this.previewPixel.style.display) {
+            if (this.previewPixel.classList.contains("active")) {
                 this.previewPixelLockBoardPos = ((pt) => {
                     const boardPt = {
                         x: Math.round(pt.x + this.board.canvas.width / 2 - Math.round(this.canvas.width / 2) - this.lineWidth / 2),
@@ -281,7 +293,7 @@ module.exports = class Canvas {
     };
 
     setPreviewPixelColor(rgbaColor) {
-        this.previewPixel.style.display = "block";
+        this.previewPixel.classList.add("active");
         this.previewPixel.style.backgroundColor = rgbaColor;
     }
 
