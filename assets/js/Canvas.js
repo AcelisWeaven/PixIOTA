@@ -31,9 +31,9 @@ module.exports = class Canvas {
         this.contentElem = document.querySelector(".content");
 
         // Keeping this here for debug purposes: draws a full-rainbowed canvas
-        for (let i = 0; i < size * size; ++i) {
-            this.board.drawPixel(i % size, Math.trunc(i / size), i % this.board.colorMap.length, i === size * size - 1);
-        }
+        // for (let i = 0; i < size * size; ++i) {
+        //     this.board.drawPixel(i % size, Math.trunc(i / size), i % this.board.colorMap.length, i === size * size - 1);
+        // }
     }
 
     initCanvas() {
