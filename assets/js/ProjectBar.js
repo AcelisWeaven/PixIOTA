@@ -35,11 +35,8 @@ module.exports = class Board {
     }
 
     updateProjects() {
-        console.log(this.projects);
         this.projects = Utilities.shuffleArray(this.projects);
-        console.log(this.projects);
         this.projects.forEach((item) => {
-            console.log(item);
             let elem = document.createElement("option");
             elem.value = item.address;
             elem.innerText = item.project;
