@@ -103,19 +103,7 @@ module.exports = class Canvas {
     trackTransforms(ctx) {
         const svg = document.createElementNS("http://www.w3.org/2000/svg", 'svg');
         let xform = svg.createSVGMatrix();
-        ctx.getTransform = () => xform;
 
-        const savedTransforms = [];
-        const save = ctx.save;
-        ctx.save = () => {
-            savedTransforms.push(xform.translate(0, 0));
-            return save.call(ctx);
-        };
-        const restore = ctx.restore;
-        ctx.restore = () => {
-            xform = savedTransforms.pop();
-            return restore.call(ctx);
-        };
         const scale = ctx.scale;
         ctx.scale = (sx, sy) => {
             xform = xform.scaleNonUniform(sx, sy);
