@@ -91,10 +91,10 @@ module.exports = class Canvas {
     registerEvents() {
         window.addEventListener("resize", this.resizeEvent.bind(this));
 
-        Utilities.addListeners(this.canvas, 'DOMMouseScroll mousewheel', this.handleScroll.bind(this), {passive: true});
+        Utilities.addListeners(this.canvas, 'DOMMouseScroll mousewheel', this.handleScroll.bind(this), false);
 
-        Utilities.addListeners(this.canvas, 'mousedown touchstart', this.dragStartEvent.bind(this), {passive: true});
-        Utilities.addListeners(this.canvas, 'mousemove touchmove', this.dragMoveEvent.bind(this), {passive: true});
+        Utilities.addListeners(this.canvas, 'mousedown touchstart', this.dragStartEvent.bind(this), false);
+        Utilities.addListeners(this.canvas, 'mousemove touchmove', this.dragMoveEvent.bind(this), false);
         Utilities.addListeners(this.canvas, 'mouseleave touchcancel touchleave', this.dragEndEvent.bind(this), false);
         Utilities.addListeners(this.canvas, 'mouseup touchend', this.touchEndEvent.bind(this), false);
     }
@@ -196,6 +196,7 @@ module.exports = class Canvas {
     }
 
     dragMoveEvent(evt) {
+        evt.preventDefault();
         if (this.scalingStart) {
             // Pinch
             const newPinchDist = Math.hypot(
@@ -272,7 +273,7 @@ module.exports = class Canvas {
         const delta = evt.wheelDelta ? evt.wheelDelta / 40 : evt.detail ? -evt.detail : 0;
         if (delta) this.zoom(delta);
         this.updatePixelPreview();
-        return false;
+        return evt.preventDefault() && false;
     };
 
     setPreviewPixelColor(rgbaColor) {
