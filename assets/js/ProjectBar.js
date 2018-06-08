@@ -15,16 +15,13 @@ module.exports = class Board {
     }
 
     updateProjects() {
-        console.log(this.projects);
-
         Object.entries(this.projects).forEach(([project, address]) => {
-            console.log(project, address);
-
             let elem = document.createElement("option");
             elem.value = project;
             elem.innerText = address;
             this.selector.appendChild(elem);
-        })
+        });
+        this.selector.classList.remove("hidden");
     }
 
 };
