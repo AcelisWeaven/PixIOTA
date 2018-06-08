@@ -288,7 +288,7 @@ html, body {
   // position and overflow are needed, it avoid hiding the android address bar and causing canvas scaling issues
   position: absolute;
   display: grid;
-  overflow: scroll;
+  overflow: auto;
   width: 100%;
   height: 100%;
   grid-template-areas: "header" "picker" "content" "footer";

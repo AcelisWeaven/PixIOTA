@@ -76,6 +76,7 @@ module.exports = class Board {
                 _this.currentColor = e.target;
                 _this.currentColor.classList.add("active");
                 _this.parent.setPreviewPixelColor(Utilities.hexColorToString(color));
+                _this.parent.projectBar.refreshProjectBar();
             });
         });
     }

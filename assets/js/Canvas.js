@@ -283,6 +283,7 @@ module.exports = class Canvas {
                 } else {
                     this.previewPixel.classList.remove('locked');
                 }
+                this.projectBar.refreshProjectBar();
                 this.updatePixelPreview();
             }
         }

@@ -5,6 +5,12 @@ module.exports = class Board {
         this.parent = parent;
         this.projects = null;
         this.selector = document.getElementById("project");
+        this.projectBar = document.querySelector(".project-bar");
+        this.projectNameElem = document.querySelector(".project-name");
+        this.projectAddressElem = document.querySelector(".project-address");
+        this.pixelMessageElem = document.querySelector(".pixel-message");
+
+        this.selector.addEventListener("change", this.refreshProjectBar.bind(this));
 
         // mock API call
         setTimeout(() => {
@@ -43,6 +49,20 @@ module.exports = class Board {
             this.selector.appendChild(elem);
         });
         this.selector.classList.remove("hidden");
+    }
+
+    refreshProjectBar() {
+        if (!this.parent.previewPixel.classList.contains('locked')) {
+            this.projectBar.classList.add("hidden");
+            return;
+        }
+
+        const selectedProject = this.projects.filter(elem => {
+            return elem.address === this.selector.value;
+        })[0];
+        this.projectNameElem.innerText = selectedProject.project;
+        this.projectAddressElem.innerText = selectedProject.address;
+        this.projectBar.classList.remove("hidden");
     }
 
 };
