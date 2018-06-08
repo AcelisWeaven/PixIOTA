@@ -18,6 +18,18 @@ html, body {
 .header {
   grid-area: header;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .left {
+    display: flex;
+    align-items: center;
+  }
+  span {
+    color: #eaeaea;
+    font-size: 15px;
+    margin: 5px;
+  }
 }
 
 #logo {
@@ -166,13 +178,13 @@ html, body {
 .preview-pixel {
   display: none;
   position: absolute;
-  transition: top 50ms linear, left 50ms linear, background-color 150ms linear;
+  transition: top 50ms linear, left 50ms linear, background-color 150ms linear, box-shadow 100ms linear;
   pointer-events: none;
   box-shadow: 0 3px 8px 1px #0000001f;
 
   &:after {
     $border-width: 10px;
-    $inner-radius: 40px;
+    $inner-radius: 50px;
     content: '';
     display: block;
     position: relative;
