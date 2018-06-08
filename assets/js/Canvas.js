@@ -257,12 +257,15 @@ module.exports = class Canvas {
                 // TODO: Do something with the board pos
                 console.log(this.previewPixelLockBoardPos);
 
-                this.previewPixel.classList.add('locked');
-
-                this.previewPixel.classList.remove('bump');
-                setTimeout(() => {
-                    this.previewPixel.classList.add('bump');
-                }, 10);
+                if (this.previewPixelLockBoardPos) {
+                    this.previewPixel.classList.remove('bump');
+                    setTimeout(() => {
+                        this.previewPixel.classList.add('bump');
+                    }, 10);
+                    this.previewPixel.classList.add('locked');
+                } else {
+                    this.previewPixel.classList.remove('locked');
+                }
                 this.updatePixelPreview();
             }
         }

@@ -168,16 +168,19 @@ html, body {
   position: absolute;
   transition: top 50ms linear, left 50ms linear, background-color 150ms linear;
   pointer-events: none;
+  box-shadow: 0 3px 8px 1px #0000001f;
 
   &:after {
+    $border-width: 10px;
+    $inner-radius: 40px;
     content: '';
     display: block;
     position: relative;
-    top: -22px;
-    left: -22px;
-    width: calc(100% + 40px);
-    height: calc(100% + 40px);
-    border: 2px solid transparent;
+    top: -$inner-radius - $border-width;
+    left: -$inner-radius - $border-width;
+    width: calc(100% + (#{$inner-radius} * 2));
+    height: calc(100% + (#{$inner-radius} * 2));
+    border: $border-width solid transparent;
     border-radius: 100%;
     border-left-color: rgba(114, 134, 122, 0.83);
     border-right-color: rgba(114, 134, 122, 0.83);
@@ -189,7 +192,11 @@ html, body {
   }
 
   &.bump {
-    animation: bump 200ms ease-in-out;
+    animation: bump 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  &.locked {
+    box-shadow: none;
   }
 }
 
@@ -204,15 +211,17 @@ html, body {
 
 @keyframes spin {
   0%, 100% {
+    transform: scale(0.8) rotate(0deg);
     border-left-color: #34ff7c;
     border-right-color: #34ff7c;
   }
   50% {
+    transform: scale(1) rotate(360deg);
     border-left-color: #0ab3d9;
     border-right-color: #0ab3d9;
   }
-  50%, 100% {
-    transform: rotate(360deg);
+  100% {
+    transform: scale(0.8) rotate(360deg);
   }
 }
 
