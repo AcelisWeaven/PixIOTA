@@ -18,9 +18,11 @@
         <span>Made with &heartsuit; by acelis</span>
     </div>
     <div class="picker">
-        <div class="label">Pick a color</div>
+        <div class="label mobile-only">Pick a color and a project</div>
+        <div class="label desktop-only">Pick a color</div>
         <div class="row-content color-picker-container"></div>
-        <label for="project" class="label" data-more="For fairness, projects are sorted randomly">Pick a project</label>
+        <label for="project" class="label desktop-only" data-more="For fairness, projects are sorted randomly">Pick a
+            project</label>
         <div class="row-content">
             <select name="project" id="project" class="hidden"></select>
         </div>
@@ -31,10 +33,11 @@
             <div class="preview-pixel"></div>
         </div>
         <div class="project-bar hidden">
-            <div id="qrcode"></div>
-            <div class="project-name"></div>
-            <div class="project-address"></div>
-            <div class="pixel-message"></div>
+            <div id="qrcode" class="desktop-only"></div>
+            <p>You're about to donate to <span class="project-name"></span>.</p>
+            <p>Donation address: <span class="project-address"></span><br>
+                You need to join this message to your donation: <span class="pixel-message"></span></p>
+            <p>Once your transaction gets confirmed, your pixel will be shown. Thanks for contributing!</p>
         </div>
     </div>
 </div>
