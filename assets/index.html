@@ -33,11 +33,16 @@
             <div class="preview-pixel"></div>
         </div>
         <div class="project-bar hidden">
-            <div id="qrcode" class="desktop-only"></div>
-            <p>You're about to donate to <span class="project-name"></span>.</p>
-            <p>Donation address: <span class="project-address"></span><br>
-                You need to join this message to your donation: <span class="pixel-message"></span></p>
-            <p>Once your transaction gets confirmed, your pixel will be shown. Thanks for contributing!</p>
+            <div class="qrcode-container desktop-only">
+                <div id="qrcode"></div>
+            </div>
+            <div>
+                <p>You're about to donate to <span class="project-name"></span>.</p>
+                <p class="desktop-only">← This QRCode can be scanned with <a href="https://trinity.iota.org/" target="_blank">Trinity</a> to pre-fill your fields!</p>
+                <p>Donation address: <span class="project-address"></span><br>
+                    You need to join this message to your donation: <span class="pixel-message"></span></p>
+                <p>Once your transaction gets confirmed, your pixel will be shown. Thanks for contributing!</p>
+            </div>
         </div>
     </div>
 </div>

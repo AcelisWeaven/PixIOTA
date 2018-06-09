@@ -71,17 +71,6 @@ html, body {
       padding-top: 5px;
       padding-bottom: 5px;
     }
-
-    span {
-      display: inline-block;
-      width: 20px;
-      line-height: 20px;
-      height: 20px;
-      text-align: center;
-      font-weight: bold;
-      border: 1px solid white;
-      border-radius: 100%;
-    }
   }
 
   .row-content {
@@ -133,7 +122,7 @@ html, body {
   opacity: 0;
 
   @media only screen and (max-width: $breakpoint) {
-    margin: 0 5px;
+    margin: 5px;
   }
 
   &:hover {
@@ -294,10 +283,6 @@ html, body {
   }
 }
 
-.footer {
-  grid-area: footer;
-}
-
 .grid-container {
   // position and overflow are needed, it avoid hiding the android address bar and causing canvas scaling issues
   position: absolute;
@@ -316,6 +301,7 @@ html, body {
 
 .project-bar {
   position: absolute;
+  display: flex;
   bottom: 0;
   left: 0;
   right: 0;
@@ -329,6 +315,10 @@ html, body {
   &.hidden {
     box-shadow: none;
     transform: translateY(100%);
+  }
+
+  div:last-child {
+    max-width: 100%;
   }
 }
 
@@ -390,4 +380,12 @@ html, body {
 p {
   padding: 0;
   margin: 10px 0;
+}
+
+.qrcode-container {
+  margin-right: 30px;
+}
+
+a {
+  color: #2f3a43;
 }

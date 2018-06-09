@@ -78,9 +78,10 @@ module.exports = class Board {
         if (!this.qrcode) {
             this.qrcode = new QRCode(this.qrcodeElem, {
                 text,
-                width: 256,
-                height: 256,
-                colorDark : "#2f3a43",
+                width: 220,
+                height: 220,
+                colorDark: "#2f3a43",
+                correctLevel: 1 // L
             });
         } else {
             this.qrcode.makeCode(text);
