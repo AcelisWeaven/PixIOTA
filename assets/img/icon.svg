@@ -10,35 +10,38 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="75.102737mm"
-   height="75.102737mm"
-   viewBox="0 0 75.102737 75.102737"
+   width="73.499123mm"
+   height="73.499123mm"
+   viewBox="0 0 73.499122 73.499122"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
-   sodipodi:docname="icon.svg">
+   sodipodi:docname="icon.svg"
+   inkscape:export-filename="C:\Users\Jeremy\IdeaProjects\pixiota\assets\img\icon.png"
+   inkscape:export-xdpi="86"
+   inkscape:export-ydpi="86">
   <defs
      id="defs2">
     <linearGradient
-       inkscape:collect="always"
-       id="linearGradient870">
+       id="linearGradient831"
+       inkscape:collect="always">
       <stop
-         style="stop-color:#5cff33;stop-opacity:1"
+         id="stop827"
          offset="0"
-         id="stop866" />
+         style="stop-color:#84ff98;stop-opacity:1" />
       <stop
-         style="stop-color:#33eeff;stop-opacity:1"
+         id="stop829"
          offset="1"
-         id="stop868" />
+         style="stop-color:#33eeff;stop-opacity:1" />
     </linearGradient>
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient870"
-       id="linearGradient872"
-       x1="18.868689"
-       y1="33.632069"
-       x2="93.971428"
-       y2="108.7348"
+       xlink:href="#linearGradient831"
+       id="linearGradient825"
+       x1="30.762182"
+       y1="42.451965"
+       x2="79.939781"
+       y2="98.311295"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
@@ -48,9 +51,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="246.93849"
-     inkscape:cy="29.036494"
+     inkscape:zoom="1.979899"
+     inkscape:cx="118.02809"
+     inkscape:cy="177.10523"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -79,13 +82,12 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-18.868689,-33.632069)">
-    <rect
-       style="opacity:1;vector-effect:none;fill:url(#linearGradient872);fill-opacity:1;stroke:none;stroke-width:2.64583325;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:34.70000076;stroke-dasharray:2.6458333, 7.9374999;stroke-dashoffset:7;stroke-opacity:1;paint-order:fill markers stroke"
-       id="rect862"
-       width="75.102737"
-       height="75.102737"
-       x="18.868689"
-       y="33.632069" />
+     transform="translate(-19.002323,-33.765705)">
+    <circle
+       style="opacity:1;vector-effect:none;fill:url(#linearGradient825);fill-opacity:1;stroke:none;stroke-width:2.64583325;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:34.70000076;stroke-dasharray:2.6458333, 7.9374999;stroke-dashoffset:7;stroke-opacity:1;paint-order:fill markers stroke"
+       id="path817"
+       cx="55.751884"
+       cy="70.515266"
+       r="36.749561" />
   </g>
 </svg>
