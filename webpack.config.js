@@ -3,8 +3,6 @@ const Encore = require('@symfony/webpack-encore');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPolyfillIOPlugin = require('html-webpack-polyfill-io-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
-const WebpackPwaManifest = require('webpack-pwa-manifest');
-const path = require('path');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 Encore
@@ -57,19 +55,6 @@ Encore
             'fetch',
         ],
         callback: 'runPixIOTA',
-    }))
-
-    .addPlugin(new WebpackPwaManifest({
-        name: 'PixIOTΛ',
-        short_name: 'PixIOTΛ',
-        description: 'Tip IOTA community developers and get your pixel drawn',
-        background_color: '#2f3a43',
-        icons: [
-            {
-                src: path.resolve('./assets/img/icon.png'),
-                sizes: [96, 128, 192, 256, 384, 512]
-            },
-        ]
     }))
 
     .addPlugin(new FaviconsWebpackPlugin({

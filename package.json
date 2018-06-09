@@ -25,7 +25,6 @@
     "postcss-loader": "^2.1.5",
     "qrcodejs2": "0.0.2",
     "sass-loader": "^7.0.2",
-    "webpack-notifier": "^1.6.0",
-    "webpack-pwa-manifest": "^3.6.2"
+    "webpack-notifier": "^1.6.0"
   }
 }
