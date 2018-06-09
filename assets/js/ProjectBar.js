@@ -60,7 +60,7 @@ module.exports = class Board {
             return;
         }
 
-        const pixelID = this.getPixelID();
+        const pixelID = `pixiota ${this.getPixelID()}`;
         const selectedProject = this.projects.filter(elem => {
             return elem.address === this.selector.value;
         })[0];
@@ -70,7 +70,7 @@ module.exports = class Board {
         this.projectBar.classList.remove("hidden");
         this.makeQrCode(JSON.stringify({
             address: selectedProject.address,
-            message: `pixiota ${pixelID}`,
+            message: pixelID,
         }));
     }
 
