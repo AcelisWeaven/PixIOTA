@@ -94,15 +94,19 @@ module.exports = class Board {
         const pixelData = JSON.parse(event.data);
 
         if (pixelData.type === "transaction") {
-            this.data[pixelData.y * this.size + pixelData.x] = this.colorMap[pixelData.c];
+            this.setPixel(pixelData.x, pixelData.y, pixelData.c);
             this.updateCtx();
             this.parent.redraw();
         } else if (pixelData.type === "transactions") {
             pixelData.transactions.forEach(px => {
-            this.data[px.y * this.size + px.x] = this.colorMap[px.c];
+                this.setPixel(px.x, px.y, px.c);
             });
             this.updateCtx();
             this.parent.redraw();
         }
+    }
+
+    setPixel(x, y, color) {
+        this.data[y * this.size + x] = this.colorMap[color];
     }
 };
