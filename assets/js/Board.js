@@ -22,6 +22,9 @@ module.exports = class Board {
         //     this.updateCtx();
         //     this.parent.redraw();
         // }, 50)
+
+        this.ws = new WebSocket("ws://localhost:8081");
+        this.ws.onmessage = this.webSocketMessageEvent.bind(this);
     }
 
     drawPixel(x, y, colorId, redraw = true) {
@@ -85,5 +88,21 @@ module.exports = class Board {
         const iData = new Uint8ClampedArray(this.data.buffer);
         const imageData = new ImageData(iData, this.size, this.size);
         this.ctx.putImageData(imageData, 0, 0);
+    }
+
+    webSocketMessageEvent(event) {
+        const pixelData = JSON.parse(event.data);
+
+        if (pixelData.type === "transaction") {
+            this.data[pixelData.y * this.size + pixelData.x] = this.colorMap[pixelData.c];
+            this.updateCtx();
+            this.parent.redraw();
+        } else if (pixelData.type === "transactions") {
+            pixelData.transactions.forEach(px => {
+            this.data[px.y * this.size + px.x] = this.colorMap[px.c];
+            });
+            this.updateCtx();
+            this.parent.redraw();
+        }
     }
 };
