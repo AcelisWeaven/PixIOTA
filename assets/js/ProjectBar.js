@@ -94,10 +94,8 @@ module.exports = class Board {
      * Second part represents the position on the board (0-9a-z)
      */
     getPixelID() {
-        const pixelNumber = ((pt) => {
-            return pt.x + pt.y * this.parent.board.size
-        })(this.parent.previewPixelLockBoardPos);
+        const pixelPt = this.parent.previewPixelLockBoardPos;
         const color = parseInt(this.parent.board.currentColor.getAttribute("data-color-index"));
-        return `${color.toString(16)}.${pixelNumber.toString(36)}`;
+        return `${color.toString(16)}.${pixelPt.x.toString(36)}.${pixelPt.y.toString(36)}`;
     }
 };
