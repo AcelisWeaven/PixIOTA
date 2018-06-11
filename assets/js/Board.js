@@ -97,7 +97,7 @@ module.exports = class Board {
             this.setPixel(pixelData.x, pixelData.y, pixelData.c);
             this.updateCtx();
             this.parent.redraw();
-        } else if (pixelData.type === "transactions") {
+        } else if (pixelData.type === "latest_transactions") {
             pixelData.transactions.forEach(px => {
                 this.setPixel(px.x, px.y, px.c);
             });
