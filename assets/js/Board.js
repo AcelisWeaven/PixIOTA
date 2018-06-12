@@ -66,17 +66,13 @@ module.exports = class Board {
             .then(data => {
                 const uint8arr = new Uint8Array(data);
                 uint8arr.forEach((e, i) => {
-                    // FIXME: There's a bug here, probably server-side
                     const px1 = Math.floor(uint8arr[i] / 16) % 16;
                     const px2 = uint8arr[i] % 16;
                     this.data[i * 2] = this.colorMap[px1];
                     this.data[i * 2 + 1] = this.colorMap[px2];
-                    if ((i * 2) % (this.size + 1) === 0 || (i * 2 + 1) % (this.size + 1) === 0) {
-                        // console.log("i", i * 2, i * 2 + 1);
-                        console.log("color ---", uint8arr[i], px1, px2);
-                    }
                 });
                 this.updateCtx();
+                this.parent.redraw();
             })
         ;
     }
