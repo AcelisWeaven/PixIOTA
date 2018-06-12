@@ -23,7 +23,7 @@ module.exports = class Board {
         //     this.parent.redraw();
         // }, 50)
 
-        this.ws = new WebSocket("ws://localhost:8081");
+        this.ws = new WebSocket("ws://localhost:8080");
         this.ws.onmessage = this.webSocketMessageEvent.bind(this);
     }
 
@@ -59,7 +59,7 @@ module.exports = class Board {
         for (let i = 0; i < this.size * this.size; ++i) {
             this.data[i] = this.colorMap[0];
         }
-        fetch("http://localhost:3000/map")
+        fetch("http://localhost:8080/map")
             .then(response => {
                 return response.arrayBuffer();
             })
