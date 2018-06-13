@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPolyfillIOPlugin = require('html-webpack-polyfill-io-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const DotenvPlugin = require('webpack-dotenv-plugin');
 
 Encore
 // the project directory where all compiled assets will be stored
@@ -73,6 +74,11 @@ Encore
             yandex: false,
             windows: false
         }
+    }))
+
+    .addPlugin(new DotenvPlugin({
+        sample: './.env.dist',
+        path: './.env'
     }))
 ;
 

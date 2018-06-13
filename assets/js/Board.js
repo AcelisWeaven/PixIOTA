@@ -16,7 +16,7 @@ module.exports = class Board {
         this.init();
         this.createPicker();
 
-        this.ws = new WebSocket("ws://localhost:8080");
+        this.ws = new WebSocket(`ws://${process.env.API_ENDPOINT}`);
         this.ws.onmessage = this.webSocketMessageEvent.bind(this);
     }
 
@@ -44,7 +44,7 @@ module.exports = class Board {
         for (let i = 0; i < this.size * this.size; ++i) {
             this.data[i] = this.colorMap[0];
         }
-        fetch("http://localhost:8080/map")
+        fetch(`http://${process.env.API_ENDPOINT}/map`)
             .then(response => {
                 return response.arrayBuffer();
             })
