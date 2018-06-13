@@ -1,4 +1,5 @@
 const Utilities = require("./Utilities");
+const WebSocketClient = require("./WebSocketClient");
 
 module.exports = class Board {
     constructor(size, parent) {
@@ -16,7 +17,7 @@ module.exports = class Board {
         this.init();
         this.createPicker();
 
-        this.ws = new WebSocket(`ws://${process.env.API_ENDPOINT}`);
+        this.ws = new WebSocketClient(`ws://${process.env.API_ENDPOINT}`);
         this.ws.onmessage = this.webSocketMessageEvent.bind(this);
     }
 
