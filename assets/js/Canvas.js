@@ -30,11 +30,6 @@ module.exports = class Canvas {
         this.updatePixelPreview();
 
         this.contentElem = document.querySelector(".content");
-
-        // Keeping this here for debug purposes: draws a full-rainbowed canvas
-        // for (let i = 0; i < size * size; ++i) {
-        //     this.board.drawPixel(i % size, Math.trunc(i / size), i % this.board.colorMap.length, i === size * size - 1);
-        // }
     }
 
     initCanvas() {
@@ -272,9 +267,6 @@ module.exports = class Canvas {
                 })(this.ctx.transformedPoint(this.lastX, this.lastY));
 
                 if (this.previewPixelLockBoardPos) {
-                    // TODO: This line is for debug purposes, remove me later
-                    this.board.drawPixel(this.previewPixelLockBoardPos.x, this.previewPixelLockBoardPos.y, this.board.currentColor.getAttribute("data-color-index"));
-
                     this.previewPixel.classList.remove('bump');
                     setTimeout(() => {
                         this.previewPixel.classList.add('bump');
