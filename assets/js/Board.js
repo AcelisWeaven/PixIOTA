@@ -45,7 +45,7 @@ module.exports = class Board {
         for (let i = 0; i < this.size * this.size; ++i) {
             this.data[i] = this.colorMap[0];
         }
-        fetch(`http://${process.env.API_ENDPOINT}/map`)
+        fetch(`${process.env.API_HTTP_SCHEME}://${process.env.API_ENDPOINT}/map`)
             .then(response => {
                 return response.arrayBuffer();
             })
