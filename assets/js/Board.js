@@ -5,6 +5,8 @@ module.exports = class Board {
         this.size = size;
         this.parent = parent;
 
+        this.ready = false;
+        this.pixelBuffer = [];
         this.canvas = document.createElement('canvas');
         this.canvas.width = size;
         this.canvas.height = size;
@@ -14,25 +16,8 @@ module.exports = class Board {
         this.init();
         this.createPicker();
 
-        // setInterval(() => {
-        //     // Change a random pixel :)
-        //     for (let i = 0; i < 5; i++) {
-        //         this.data[Math.floor(Math.random() * this.data.length)] = this.colorMap[Math.floor(Math.random() * this.colorMap.length)];
-        //     }
-        //     this.updateCtx();
-        //     this.parent.redraw();
-        // }, 50)
-
         this.ws = new WebSocket("ws://localhost:8080");
         this.ws.onmessage = this.webSocketMessageEvent.bind(this);
-    }
-
-    drawPixel(x, y, colorId, redraw = true) {
-        this.data[y * this.size + x] = this.colorMap[colorId];
-        if (redraw) {
-            this.updateCtx();
-            this.parent.redraw();
-        }
     }
 
     init() {
@@ -71,7 +56,13 @@ module.exports = class Board {
                     this.data[i * 2] = this.colorMap[px1];
                     this.data[i * 2 + 1] = this.colorMap[px2];
                 });
+                // apply all buffered pixels
+                this.pixelBuffer.forEach(px => {
+                    this.setPixel(px.x, px.y, px.c);
+                });
+                this.pixelBuffer = [];
                 this.updateCtx();
+                this.ready = true;
                 this.parent.redraw();
             })
         ;
@@ -107,6 +98,16 @@ module.exports = class Board {
 
     webSocketMessageEvent(event) {
         const pixelData = JSON.parse(event.data);
+
+        // if map hasn't been fetched yet, we buffer newly-received pixels
+        if (this.ready === false) {
+            if (pixelData.type === "transaction") {
+                this.pixelBuffer.push(pixelData);
+            } else if (pixelData.type === "latest_transactions") {
+                this.pixelBuffer.unshift(...pixelData.transactions);
+            }
+            return;
+        }
 
         if (pixelData.type === "transaction") {
             this.setPixel(pixelData.x, pixelData.y, pixelData.c);
