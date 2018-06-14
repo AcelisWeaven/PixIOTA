@@ -72,12 +72,9 @@ module.exports = class Board {
     createPicker() {
         this.picker = document.querySelector('.color-picker-container');
         this.currentColor = null;
+        this.colorItems = this.picker.querySelectorAll('.color-picker');
         this.colorMap.forEach((color, colorIndex) => {
-            let colorPicker = document.createElement("div");
-            colorPicker.classList.add("color-picker");
-            colorPicker.setAttribute("data-color-index", colorIndex);
-            this.picker.appendChild(colorPicker);
-
+            const colorPicker = this.colorItems[colorIndex];
             let _this = this;
             Utilities.addListeners(colorPicker, "mouseup touchend", (e) => {
                 if (_this.currentColor) {
