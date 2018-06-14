@@ -85,13 +85,6 @@ html, body {
     select {
       max-width: 40px * 16;
       width: 100%;
-      animation: fadeIn 200ms ease-out;
-      animation-fill-mode: forwards;
-      opacity: 0;
-
-      &.hidden {
-        animation: none;
-      }
     }
   }
 
@@ -268,15 +261,6 @@ html, body {
   }
   100% {
     transform: scale(0.8) rotate(360deg);
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }
 
