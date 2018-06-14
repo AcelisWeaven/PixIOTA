@@ -1,7 +1,6 @@
 // webpack.config.js
 const Encore = require('@symfony/webpack-encore');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackPolyfillIOPlugin = require('html-webpack-polyfill-io-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const DotenvPlugin = require('webpack-dotenv-plugin');
@@ -48,14 +47,6 @@ Encore
         inlineSource: '.(js|css)$',
         template: './assets/index.html',
         filename: './index.html' //relative to root of the application
-    }))
-
-    .addPlugin(new HtmlWebpackPolyfillIOPlugin({
-        features: [
-            'Promise',
-            'fetch',
-        ],
-        callback: 'runPixIOTA',
     }))
 
     .addPlugin(new FaviconsWebpackPlugin({
