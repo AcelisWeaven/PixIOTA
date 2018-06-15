@@ -376,7 +376,7 @@ a {
   color: #2f3a43;
 }
 
-.beta {
+.header .beta {
   color: #ff6960;
   font-weight: bold;
   margin-bottom: 4px;
@@ -385,5 +385,7 @@ a {
   .big {
     color: #ff6960;
     font-size: 19px;
+    display: inline;
+    margin-left: 0;
   }
 }
