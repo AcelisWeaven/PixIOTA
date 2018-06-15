@@ -52,9 +52,6 @@ Encore
         inlineSource: '.(js|css)$',
         template: './assets/index.html',
         filename: './index.html', //relative to root of the application
-        templateParameters: {
-            preloadMapUrl: `${process.env.API_HTTP_SCHEME}://${process.env.API_ENDPOINT}/map`,
-        }
     }))
 
     .addPlugin(new FaviconsWebpackPlugin({
