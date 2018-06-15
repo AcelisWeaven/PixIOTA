@@ -55,6 +55,7 @@ module.exports = class Board {
     }
 
     refreshProjectBar() {
+        if (!this.projects) return;
         if (!this.parent.previewPixel.classList.contains('locked')) {
             this.projectBar.classList.add("hidden");
             return;
