@@ -40,6 +40,11 @@ html, body {
     font-size: 15px;
     margin: 5px;
 
+    &.heart {
+      margin: 5px 0;
+      color: #ff6960;
+    }
+
     @media only screen and (max-width: $breakpoint) {
       display: none;
     }
@@ -330,13 +335,13 @@ html, body {
 
 @media only screen and (max-width: $breakpoint) {
   .desktop-only {
-      display: none;
+    display: none;
   }
 }
 
 @media only screen and (min-width: $breakpoint) {
   .mobile-only {
-      display: none;
+    display: none;
   }
 }
 
@@ -369,4 +374,16 @@ p {
 
 a {
   color: #2f3a43;
+}
+
+.beta {
+  color: #ff6960;
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-size: 13px;
+
+  .big {
+    color: #ff6960;
+    font-size: 19px;
+  }
 }
