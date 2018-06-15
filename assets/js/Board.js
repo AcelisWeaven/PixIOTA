@@ -17,7 +17,7 @@ module.exports = class Board {
         this.init();
         this.createPicker();
 
-        this.ws = new WebSocketClient(`${process.env.API_WS_SCHEME}://${process.env.API_ENDPOINT}`);
+        this.ws = new WebSocketClient(`${process.env.API_WS_SCHEME}://${process.env.API_ENDPOINT}${process.env.WS_SUFFIX}`);
         this.ws.onmessage = this.webSocketMessageEvent.bind(this);
     }
 
