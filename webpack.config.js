@@ -43,10 +43,18 @@ Encore
     // allow sass/scss files to be processed
     .enableSassLoader()
 
+    .addPlugin(new DotenvPlugin({
+        sample: './.env.dist',
+        path: './.env'
+    }))
+
     .addPlugin(new HtmlWebpackPlugin({
         inlineSource: '.(js|css)$',
         template: './assets/index.html',
-        filename: './index.html' //relative to root of the application
+        filename: './index.html', //relative to root of the application
+        templateParameters: {
+            preloadMapUrl: `${process.env.API_HTTP_SCHEME}://${process.env.API_ENDPOINT}/map`,
+        }
     }))
 
     .addPlugin(new FaviconsWebpackPlugin({
@@ -65,11 +73,6 @@ Encore
             yandex: false,
             windows: false
         }
-    }))
-
-    .addPlugin(new DotenvPlugin({
-        sample: './.env.dist',
-        path: './.env'
     }))
 ;
 
