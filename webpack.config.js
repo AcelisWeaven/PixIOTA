@@ -41,7 +41,11 @@ Encore
     // .enableVersioning()
 
     // allow sass/scss files to be processed
-    .enableSassLoader()
+    .enableSassLoader((options) => {
+        return {
+            data: `$beta: ${process.env.BETA};`,
+        };
+    })
 
     .addPlugin(new DotenvPlugin({
         sample: './.env.dist',
@@ -52,6 +56,9 @@ Encore
         inlineSource: '.(js|css)$',
         template: './assets/index.html',
         filename: './index.html', //relative to root of the application
+        templateParameters: {
+            beta: process.env.BETA,
+        }
     }))
 
     .addPlugin(new FaviconsWebpackPlugin({
