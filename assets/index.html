@@ -8,7 +8,11 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120913769-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'UA-120913769-1');
@@ -65,11 +69,11 @@
                 <div id="qrcode"></div>
             </div>
             <div>
-                <p>You're about to donate to <span class="project-name"></span>.</p>
-                <p class="desktop-only">← This QRCode can be scanned with <a href="https://trinity.iota.org/"
-                                                                             target="_blank">Trinity</a> to pre-fill
-                    your fields!</p>
-                <p>Donation address: <span class="project-address"></span><br>
+                <p>You're about to donate to <a class="project-name" target="_blank" rel="noopener noreferrer"></a>.</p>
+                <p class="desktop-only">← <em>This QRCode can be scanned with
+                    <a href="https://trinity.iota.org/" target="_blank">Trinity</a>
+                    to pre-fill your fields!</em></p>
+                <p class="info">Donation address: <span class="project-address"></span><br>
                     You need to join this message to your donation: <span class="pixel-message"></span></p>
                 <p>Minimum amount required to validate a pixel is <strong>1 iota</strong>.</p>
                 <p>Once your transaction gets confirmed, your pixel will be shown. Thanks for contributing!</p>

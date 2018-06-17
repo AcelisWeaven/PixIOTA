@@ -366,6 +366,13 @@ html, body {
 p {
   padding: 0;
   margin: 10px 0;
+
+  &.info {
+    border: 1px solid #c3c3c3;
+    border-radius: 5px;
+    padding: 8px 17px;
+    box-shadow: 0 6px 15px #70d2e917 inset;
+  }
 }
 
 .qrcode-container {

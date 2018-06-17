@@ -49,6 +49,11 @@ module.exports = class Board {
             return elem.address === this.selector.value;
         })[0];
         this.projectNameElem.innerText = selectedProject.project;
+        if (selectedProject.link) {
+            this.projectNameElem.href = selectedProject.link;
+        } else {
+            this.projectNameElem.removeAttribute("href");
+        }
         this.projectAddressElem.innerText = selectedProject.address;
         this.pixelMessageElem.innerText = pixelID;
         this.projectBar.classList.remove("hidden");
