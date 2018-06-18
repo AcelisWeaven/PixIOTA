@@ -5,18 +5,26 @@
     <title>PixIOTA</title>
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <meta name="theme-color" content="#2f3a43"/>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120913769-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+    <% if (process.env.GOOGLE_ANALYTICS_TAG !== "UA-YOURTAG-1") { %>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=<%= process.env.GOOGLE_ANALYTICS_TAG %>"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
+            function gtag() {
+                dataLayer.push(arguments);
+            }
 
-        gtag('js', new Date());
+            gtag('js', new Date());
 
-        gtag('config', 'UA-120913769-1');
-    </script>
+            gtag('config', '<%= process.env.GOOGLE_ANALYTICS_TAG %>');
+        </script>
+    <% } %>
+
+    <meta property="og:title" content="PixIOTA - Tip creators and draw pixels"/>
+    <meta property="og:description" content="Support IOTA ecosystem developers by drawing collaboratively"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="<%= process.env.URL %>"/>
+    <meta property="og:image" content="<%= process.env.URL %><%= require('./img/pixiota-banner.png') %>"/>
 </head>
 <body>
 <div class="grid-container">
