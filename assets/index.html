@@ -21,10 +21,18 @@
     <% } %>
 
     <meta property="og:title" content="PixIOTA - Tip creators and draw pixels"/>
+    <meta name="twitter:title" content="PixIOTA - Tip creators and draw pixels">
+
     <meta property="og:description" content="Support IOTA ecosystem developers by drawing collaboratively"/>
+    <meta name="twitter:description" content="Support IOTA ecosystem developers by drawing collaboratively">
+
+    <meta property="og:image" content="<%= process.env.URL %><%= require('./img/pixiota-banner.png') %>"/>
+    <meta name="twitter:image" content="<%= process.env.URL %><%= require('./img/pixiota-banner.png') %>">
+
+    <meta name="twitter:card" content="summary_large_image">
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="<%= process.env.URL %>"/>
-    <meta property="og:image" content="<%= process.env.URL %><%= require('./img/pixiota-banner.png') %>"/>
+    <meta property="og:site_name" content="PixIOTA">
 </head>
 <body>
 <div class="grid-container">
