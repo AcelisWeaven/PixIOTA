@@ -31,7 +31,7 @@ module.exports = class Board {
             0XFF00F0FF,
             0XFF00FFA1,
             0XFF00FF34,
-            0XFF3AFF00,
+            0XFF85FF33,
             0XFFA7FF00,
             0XFFFFEA00,
             0XFFFF7C00,
